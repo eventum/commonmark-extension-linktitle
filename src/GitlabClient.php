@@ -13,4 +13,9 @@ class GitlabClient
     {
         $this->client = $client;
     }
+
+    public function getIssue(string $project_id, int $issue_iid)
+    {
+        return $this->client->issues->show($project_id, $issue_iid);
+    }
 }
