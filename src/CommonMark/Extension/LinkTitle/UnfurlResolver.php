@@ -4,7 +4,7 @@ namespace Eventum\Delfi\CommonMark\Extension\LinkTitle;
 
 use League\CommonMark\Inline\Element\Link;
 
-class UnfurlResolver
+class UnfurlResolver implements UnfurlInterface
 {
     /** @var UnfurlInterface[] */
     private $resolvers;
@@ -14,7 +14,12 @@ class UnfurlResolver
         $this->resolvers = $resolvers;
     }
 
-    public function resolve(Link $link): void
+    public function accept(Link $link): bool
+    {
+        return count($this->resolvers) > 0;
+    }
+
+    public function unfurl(Link $link): array
     {
         foreach ($this->resolvers as $resolver) {
             if ($resolver->accept($link)) {
@@ -22,5 +27,7 @@ class UnfurlResolver
                 $link->data['attributes']['title'] = $result['title'];
             }
         }
+
+        return [];
     }
 }

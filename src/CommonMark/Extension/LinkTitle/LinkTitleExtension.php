@@ -16,14 +16,14 @@ final class LinkTitleExtension implements ExtensionInterface
 {
     use LoggerTrait;
 
-    /** @var UnfurlResolver */
-    private $resolver;
+    /** @var UnfurlInterface */
+    private $unfurl;
 
     public function __construct(
-        UnfurlResolver $resolver,
+        UnfurlInterface $unfurl,
         LoggerInterface $logger
     ) {
-        $this->resolver = $resolver;
+        $this->unfurl = $unfurl;
         $this->logger = $logger;
     }
 
@@ -40,7 +40,7 @@ final class LinkTitleExtension implements ExtensionInterface
                 }
 
                 try {
-                    $this->resolver->resolve($node);
+                    $this->unfurl->unfurl($node);
                 } catch (Throwable $e) {
                     $this->error($e->getMessage(), ['e' => $e]);
                 }
