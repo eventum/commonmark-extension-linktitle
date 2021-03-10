@@ -26,8 +26,15 @@ class GitlabUnfurl implements UnfurlInterface
         [$projectPath, $issueId] = $this->getProjectPathAndIssueId($link->getUrl());
         $result = $this->client->getIssue($projectPath, $issueId);
 
+        $title = sprintf(
+            'Issue #%d: (%s): %s',
+            $result['iid'],
+            $result['state'],
+            $result['title']
+        );
+
         return [
-            'title' => $result['title'],
+            'title' => $title,
         ];
     }
 
