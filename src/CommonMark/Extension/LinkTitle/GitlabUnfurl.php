@@ -33,9 +33,16 @@ class GitlabUnfurl implements UnfurlInterface
 
     public function accept(Link $link): bool
     {
-        $domain = parse_url($link->getUrl(), PHP_URL_HOST);
+        $url = $link->getUrl();
+        $domain = parse_url($url, PHP_URL_HOST);
 
-        return $domain === $this->domain;
+        if ($domain !== $this->domain) {
+            return false;
+        }
+
+        $path = parse_url($url, PHP_URL_PATH);
+
+        return strpos($path, '/issues/') !== false;
     }
 
     /**
