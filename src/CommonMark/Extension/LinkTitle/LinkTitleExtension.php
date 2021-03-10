@@ -11,6 +11,14 @@ use League\CommonMark\Inline\Element\Link;
 
 final class LinkTitleExtension implements ExtensionInterface
 {
+    /** @var UnfurlResolver */
+    private $resolver;
+
+    public function __construct(UnfurlResolver $resolver)
+    {
+        $this->resolver = $resolver;
+    }
+
     public function register(ConfigurableEnvironmentInterface $environment): void
     {
         // Intercept Link elements and add title attribute
@@ -23,12 +31,8 @@ final class LinkTitleExtension implements ExtensionInterface
                     continue;
                 }
 
-                $this->linkWalker($node);
+                $this->resolver->resolve($node);
             }
         });
-    }
-
-    private function linkWalker(Link $link): void
-    {
     }
 }
