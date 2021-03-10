@@ -18,7 +18,8 @@ class UnfurlResolver
     {
         foreach ($this->resolvers as $resolver) {
             if ($resolver->accept($link)) {
-                $resolver->unfurl($link);
+                $result = $resolver->unfurl($link);
+                $link->data['attributes']['title'] = $result['title'];
             }
         }
     }
