@@ -33,7 +33,9 @@ class UnfurlResolver implements UnfurlInterface
             try {
                 if ($resolver->accept($link)) {
                     $result = $resolver->unfurl($link);
-                    $link->data['attributes']['title'] = $result['title'];
+                    if ($result['title'] ?? null) {
+                        $link->data['attributes']['title'] = $result['title'];
+                    }
                 }
             } catch (Throwable $e) {
                 $this->error($e->getMessage(), ['e' => $e]);
