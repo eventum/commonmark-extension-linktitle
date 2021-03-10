@@ -2,6 +2,7 @@
 
 namespace Eventum\Delfi\Subscriber;
 
+use Eventum\Delfi\CommonMark\Extension\LinkTitle\LinkTitleExtension;
 use Eventum\Event\SystemEvents;
 use League\CommonMark\Environment;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -25,5 +26,6 @@ class MarkdownExtension implements EventSubscriberInterface
 
     private function applyExtensions(Environment $environment): void
     {
+        $environment->addExtension(new LinkTitleExtension());
     }
 }
