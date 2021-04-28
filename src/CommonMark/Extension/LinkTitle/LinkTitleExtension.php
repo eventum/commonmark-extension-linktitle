@@ -42,7 +42,7 @@ final class LinkTitleExtension implements ExtensionInterface
                 try {
                     $this->unfurl->unfurl($node);
                 } catch (Throwable $e) {
-                    $this->error($e->getMessage(), ['e' => $e]);
+                    $this->debug($e->getMessage(), ['e' => $e]);
                 }
             }
         });
