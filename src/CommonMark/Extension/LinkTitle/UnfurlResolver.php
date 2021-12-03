@@ -30,15 +30,19 @@ class UnfurlResolver implements UnfurlInterface
     public function unfurl(Link $link): array
     {
         foreach ($this->resolvers as $resolver) {
+            if (!$resolver->accept($link)) {
+                continue;
+            }
+
             try {
-                if ($resolver->accept($link)) {
-                    $result = $resolver->unfurl($link);
-                    if ($result['title'] ?? null) {
-                        $link->data['attributes']['title'] = $result['title'];
-                    }
-                }
+                $result = $resolver->unfurl($link);
             } catch (Throwable $e) {
                 $this->error($e->getMessage(), ['e' => $e]);
+                continue;
+            }
+
+            if ($result['title'] ?? null) {
+                $link->data['attributes']['title'] = $result['title'];
             }
         }
 
