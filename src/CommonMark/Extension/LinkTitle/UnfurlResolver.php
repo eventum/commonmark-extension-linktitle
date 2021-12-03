@@ -37,7 +37,7 @@ class UnfurlResolver implements UnfurlInterface
             try {
                 $result = $resolver->unfurl($link);
             } catch (Throwable $e) {
-                $this->error($e->getMessage(), ['e' => $e]);
+                $this->debug($e->getMessage(), ['e' => $e]);
                 continue;
             }
 
