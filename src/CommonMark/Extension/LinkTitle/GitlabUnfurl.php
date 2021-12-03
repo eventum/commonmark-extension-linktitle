@@ -3,6 +3,7 @@
 namespace Eventum\Delfi\CommonMark\Extension\LinkTitle;
 
 use Eventum\Delfi\GitlabClient;
+use Gitlab\Exception\RuntimeException as GitlabRuntimeException;
 use League\CommonMark\Inline\Element\Link;
 use UnexpectedValueException;
 
@@ -24,7 +25,13 @@ class GitlabUnfurl implements UnfurlInterface
     public function unfurl(Link $link): array
     {
         [$projectPath, $issueId] = $this->getProjectPathAndIssueId($link->getUrl());
-        $result = $this->client->getIssue($projectPath, $issueId);
+        try {
+            $result = $this->client->getIssue($projectPath, $issueId);
+        } catch (GitlabRuntimeException $e) {
+            if ($e->getCode() === 404) {
+                return [];
+            }
+        }
 
         $title = sprintf(
             'Issue #%d: (%s): %s',
