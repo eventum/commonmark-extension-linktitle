@@ -15,7 +15,6 @@ use Pimple\Container;
 class EventumExtension implements
     Provider\AutoloadProvider,
     Provider\ServiceProvider,
-    Provider\FactoryProvider,
     Provider\SubscriberProvider
 {
     public const SERVICE_KEY_CONFIG = 'commonmark-linktitle.config';
@@ -94,20 +93,6 @@ class EventumExtension implements
     public function register(Container $app): void
     {
         $app->register(new ServiceProvider());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function factory($className)
-    {
-        $services = ServiceContainer::getInstance();
-
-        if (isset($services[$className])) {
-            return $services[$className];
-        }
-
-        return null;
     }
 
     /**
