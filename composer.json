@@ -1,0 +1,44 @@
+{
+    "name": "eventum/commonmark-extension-linktitle",
+    "authors": [
+        {
+            "name": "Elan Ruusamäe",
+            "email": "glen@pld-linux.org"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://eventum.github.io/composer/",
+            "only": [
+                "eventum/eventum",
+                "fonts/liberation",
+                "horde/text-flowed",
+                "horde/util",
+                "phplot/phplot",
+                "sphinx/php-sphinxapi"
+            ]
+        }
+    ],
+    "config": {
+        "platform": {
+            "php": "7.3.33"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Eventum\\Extension\\CommonMarkLinkTitle\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.3",
+        "m4tthumphrey/php-gitlab-api": "^9.18",
+        "php-http/guzzle6-adapter": "^1.0"
+    },
+    "require-dev": {
+        "league/commonmark": "^1.5.4",
+        "pimple/pimple": "^3.0.2",
+        "psr/log": "^1.1"
+    }
+}
