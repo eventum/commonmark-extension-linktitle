@@ -14,6 +14,7 @@ use Pimple\Container;
  */
 class EventumExtension implements
     Provider\AutoloadProvider,
+    Provider\ServiceProvider,
     Provider\FactoryProvider,
     Provider\SubscriberProvider
 {
@@ -90,12 +91,17 @@ class EventumExtension implements
         return [$classmap, $psr0, $psr4, $files];
     }
 
+    public function register(Container $app): void
+    {
+        $app->register(new ServiceProvider());
+    }
+
     /**
      * {@inheritdoc}
      */
     public function factory($className)
     {
-        $services = self::getServiceContainer();
+        $services = ServiceContainer::getInstance();
 
         return $services[$className] ?? null;
     }
@@ -117,20 +123,8 @@ class EventumExtension implements
 
     public static function getConfig(): Config
     {
-        $container = self::getServiceContainer();
+        $container = ServiceContainer::getInstance();
 
         return $container[self::SERVICE_KEY_CONFIG];
-    }
-
-    private static function getServiceContainer(): Container
-    {
-        static $services;
-
-        if (!$services) {
-            $services = ServiceContainer::getInstance();
-            $services->register(new ServiceProvider());
-        }
-
-        return $services;
     }
 }
