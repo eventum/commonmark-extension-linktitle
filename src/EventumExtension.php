@@ -3,6 +3,7 @@
 namespace Eventum\Extension\CommonMarkLinkTitle;
 
 use Eventum;
+use Eventum\Config\Config;
 use Eventum\Extension\ClassLoader;
 use Eventum\Extension\Provider;
 use Eventum\ServiceContainer;
@@ -16,6 +17,9 @@ class EventumExtension implements
     Provider\FactoryProvider,
     Provider\SubscriberProvider
 {
+    public const SERVICE_KEY_CONFIG = 'commonmark-linktitle.config';
+    public const EXTENSION_CONFIG_KEY =  'commonmark-linktitle';
+
     /**
      * Method invoked so the extension can setup class loader.
      *
@@ -109,6 +113,13 @@ class EventumExtension implements
             Subscriber\CryptoSubscriber::class,
             Subscriber\MarkdownExtension::class,
         ];
+    }
+
+    public static function getConfig(): Config
+    {
+        $container = self::getServiceContainer();
+
+        return $container[self::SERVICE_KEY_CONFIG];
     }
 
     private static function getServiceContainer(): Container

@@ -14,9 +14,9 @@ class ServiceProvider implements Pimple\ServiceProviderInterface
 {
     public function register(Container $app): void
     {
-        $app['commonmark-linktitle.config'] = static function () {
+        $app[EventumExtension::SERVICE_KEY_CONFIG] = static function () {
             $setup = ServiceContainer::getConfig();
-            $extensionName = 'commonmark-linktitle';
+            $extensionName = EventumExtension::EXTENSION_CONFIG_KEY;
             $config = $setup['extension'][$extensionName];
 
             // if no config yet. create it.
