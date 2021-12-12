@@ -29,6 +29,13 @@ class ServiceProvider implements Pimple\ServiceProviderInterface
                 $config = $setup['workflow'][$extensionName];
             }
 
+            // pre-fill keys used by this extension
+            if ($config['gitlab.url'] === null || $config['gitlab.api_token'] === null) {
+                $config['gitlab.url'] = $config['gitlab.url'] ?? '';
+                $config['gitlab.api_token'] = $config['gitlab.api_token'] ?? '';
+                Setup::save();
+            }
+
             return $config;
         };
 
