@@ -1,5 +1,7 @@
 {
     "name": "eventum/commonmark-extension-linktitle",
+    "description": "Markdown LinkTitle Extension for Eventum",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Elan Ruusamäe",
