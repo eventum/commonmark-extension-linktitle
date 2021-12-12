@@ -1,7 +1,8 @@
 <?php
 
-namespace Eventum\Delfi;
+namespace Eventum\Extension\CommonMarkLinkTitle;
 
+use Eventum\Extension\CommonMarkLinkTitle\Subscriber\MarkdownExtension;
 use Eventum\ServiceContainer;
 use Gitlab;
 use Pimple;
@@ -50,35 +51,35 @@ class ServiceProvider implements Pimple\ServiceProviderInterface
 
     private function registerMarkdownExtensions(Container $app): void
     {
-        $app[Subscriber\MarkdownExtension::class] = static function ($app) {
-            return new Subscriber\MarkdownExtension([
-                $app[CommonMark\Extension\LinkTitle\LinkTitleExtension::class],
+        $app[MarkdownExtension::class] = static function ($app) {
+            return new MarkdownExtension([
+                $app[LinkTitle\LinkTitleExtension::class],
             ]);
         };
 
-        $app[CommonMark\Extension\LinkTitle\LinkTitleExtension::class] = static function ($app) {
-            return new CommonMark\Extension\LinkTitle\LinkTitleExtension(
-                $app[CommonMark\Extension\LinkTitle\UnfurlResolver::class],
+        $app[LinkTitle\LinkTitleExtension::class] = static function ($app) {
+            return new LinkTitle\LinkTitleExtension(
+                $app[LinkTitle\UnfurlResolver::class],
                 $app[LoggerInterface::class]
             );
         };
 
-        $app[CommonMark\Extension\LinkTitle\UnfurlResolver::class] = static function ($app) {
+        $app[LinkTitle\UnfurlResolver::class] = static function ($app) {
             $resolvers = [
-                $app[CommonMark\Extension\LinkTitle\GitlabUnfurl::class],
+                $app[LinkTitle\GitlabUnfurl::class],
             ];
 
-            return new CommonMark\Extension\LinkTitle\UnfurlResolver(
+            return new LinkTitle\UnfurlResolver(
                 $resolvers,
                 $app[LoggerInterface::class]
             );
         };
 
-        $app[CommonMark\Extension\LinkTitle\GitlabUnfurl::class] = static function ($app) {
+        $app[LinkTitle\GitlabUnfurl::class] = static function ($app) {
             $config = $app['commonmark-linktitle.config'];
             $domain = parse_url($config['gitlab.url'], PHP_URL_HOST);
 
-            return new CommonMark\Extension\LinkTitle\GitlabUnfurl(
+            return new LinkTitle\GitlabUnfurl(
                 $app[GitlabClient::class],
                 $domain
             );

@@ -1,6 +1,6 @@
 <?php
 
-namespace Eventum\Delfi\Subscriber;
+namespace Eventum\Extension\CommonMarkLinkTitle\Subscriber;
 
 use Eventum\Event\SystemEvents;
 use League\CommonMark\Environment;

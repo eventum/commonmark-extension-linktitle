@@ -1,6 +1,6 @@
 <?php
 
-namespace Eventum\Delfi\CommonMark\Extension\LinkTitle;
+namespace Eventum\Extension\CommonMarkLinkTitle\LinkTitle;
 
 use League\CommonMark\Inline\Element\Link;
 

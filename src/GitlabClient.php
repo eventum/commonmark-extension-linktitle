@@ -1,6 +1,6 @@
 <?php
 
-namespace Eventum\Delfi;
+namespace Eventum\Extension\CommonMarkLinkTitle;
 
 use Gitlab;
 

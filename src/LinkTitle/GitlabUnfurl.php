@@ -1,8 +1,8 @@
 <?php
 
-namespace Eventum\Delfi\CommonMark\Extension\LinkTitle;
+namespace Eventum\Extension\CommonMarkLinkTitle\LinkTitle;
 
-use Eventum\Delfi\GitlabClient;
+use Eventum\Extension\CommonMarkLinkTitle\GitlabClient;
 use Gitlab\Exception\RuntimeException as GitlabRuntimeException;
 use League\CommonMark\Inline\Element\Link;
 use UnexpectedValueException;

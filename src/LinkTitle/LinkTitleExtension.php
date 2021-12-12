@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eventum\Delfi\CommonMark\Extension\LinkTitle;
+namespace Eventum\Extension\CommonMarkLinkTitle\LinkTitle;
 
 use Eventum\Logger\LoggerTrait;
 use League\CommonMark\ConfigurableEnvironmentInterface;
