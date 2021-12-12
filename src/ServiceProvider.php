@@ -15,19 +15,7 @@ class ServiceProvider implements Pimple\ServiceProviderInterface
     public function register(Container $app): void
     {
         $app[EventumExtension::SERVICE_KEY_CONFIG] = static function () {
-            $setup = ServiceContainer::getConfig();
-            $extensionName = EventumExtension::EXTENSION_CONFIG_KEY;
-            $config = $setup['extension'][$extensionName];
-
-            // if no config yet. create it.
-            if (!$config) {
-                if (!$setup['extension']) {
-                    $setup['extension'] = [];
-                }
-                $setup['extension'][$extensionName] = [];
-                Setup::save();
-                $config = $setup['extension'][$extensionName];
-            }
+            $config = ServiceContainer::getExtensionConfig(EventumExtension::EXTENSION_CONFIG_KEY);
 
             // pre-fill keys used by this extension
             if ($config['gitlab.url'] === null || $config['gitlab.api_token'] === null) {
