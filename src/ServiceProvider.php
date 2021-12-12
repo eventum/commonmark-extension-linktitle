@@ -26,7 +26,7 @@ class ServiceProvider implements Pimple\ServiceProviderInterface
                 }
                 $setup['extension'][$extensionName] = [];
                 Setup::save();
-                $config = $setup['workflow'][$extensionName];
+                $config = $setup['extension'][$extensionName];
             }
 
             // pre-fill keys used by this extension
