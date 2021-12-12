@@ -44,7 +44,7 @@ class ServiceProvider implements Pimple\ServiceProviderInterface
         };
 
         $app[Gitlab\Client::class] = static function ($app) {
-            $config = $app['commonmark-linktitle.config'];
+            $config = $app[EventumExtension::SERVICE_KEY_CONFIG];
 
             $client = new Gitlab\Client();
             $client->setUrl($config['gitlab.url']);
@@ -83,7 +83,7 @@ class ServiceProvider implements Pimple\ServiceProviderInterface
         };
 
         $app[LinkTitle\GitlabUnfurl::class] = static function ($app) {
-            $config = $app['commonmark-linktitle.config'];
+            $config = $app[EventumExtension::SERVICE_KEY_CONFIG];
             $domain = parse_url($config['gitlab.url'], PHP_URL_HOST);
 
             return new LinkTitle\GitlabUnfurl(
