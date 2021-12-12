@@ -106,6 +106,7 @@ class EventumExtension implements
     public function getSubscribers(): array
     {
         return [
+            Subscriber\CryptoSubscriber::class,
             Subscriber\MarkdownExtension::class,
         ];
     }
