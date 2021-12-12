@@ -103,7 +103,11 @@ class EventumExtension implements
     {
         $services = ServiceContainer::getInstance();
 
-        return $services[$className] ?? null;
+        if (isset($services[$className])) {
+            return $services[$className];
+        }
+
+        return null;
     }
 
     /**
