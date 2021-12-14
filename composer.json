@@ -33,6 +33,9 @@
             "Eventum\\Extension\\CommonMarkLinkTitle\\": "src/"
         }
     },
+    "conflict": {
+        "eventum/eventum": "<3.10.10"
+    },
     "require": {
         "php": "^7.3",
         "m4tthumphrey/php-gitlab-api": "^9.18",
